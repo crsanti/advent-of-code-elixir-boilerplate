@@ -22,8 +22,9 @@ defmodule Mix.Tasks.Aoc do
     fun = :"run#{part}"
 
     with {:module, module} <- Code.ensure_loaded(module),
-         true <- function_exported?(module, fun, 0) do
-      run({module, fun, []}, flags)
+         true <- function_exported?(module, fun, 1) do
+      input = apply(module, :input, [])
+      run({module, fun, [input]}, flags)
     else
       {:error, :nofile} ->
         IO.puts("#{module} does not exist")
@@ -38,7 +39,7 @@ defmodule Mix.Tasks.Aoc do
 
   defp run({mod, fun, args}, flags) do
     if flags[:bench?] do
-      Benchee.run(%{fun: fn -> apply(mod, fun, args) end})
+      Benchee.run(%{"#{fun}": fn -> apply(mod, fun, args) end})
     else
       apply(mod, fun, args)
       |> IO.inspect(label: "Results")

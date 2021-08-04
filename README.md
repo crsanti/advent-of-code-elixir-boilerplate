@@ -32,18 +32,18 @@ mix aoc day7
 
 ## How to add days
 
-Just create a module in `./src/day<number>/day<number>.ex` that exports two functions:
+Just create a module in `./src/day<number>/day<number>.ex` that exports three functions:
 
 ```elixir
-defmodule AdventOfCode.DayX do
-  @input "input from Advent Of Code"
-
-  def run1 do
-    # Code to solve Part One
+defmodule AdventOfCode.Day1 do
+  def input do
+    ""
   end
 
-  def run2 do
-    # Code to solve Part Two
+  def run1(input) do
+  end
+
+  def run2(input) do
   end
 end
 ```
